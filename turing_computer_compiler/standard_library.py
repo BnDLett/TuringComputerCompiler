@@ -35,7 +35,7 @@ def comment(instruction: list[str]) -> CompileResult:
 
 @compiler.rule
 def insert(instruction: list[str], label_position: int | None = None) -> CompileResult | str:
-    if instruction[0] != "INSERT": return CompileResult.UNRECOGNIZED_INSTRUCTION
+    if instruction[0] != "PANA": return CompileResult.UNRECOGNIZED_INSTRUCTION
     elif len(instruction) != 3: return CompileResult.COMPILE_ERROR
 
     value = instruction[1]
@@ -62,7 +62,7 @@ def arithmetic(instruction: list[str]) -> CompileResult | str:
     INSTRUCTION = "0b00000000000000000100000000"
 
     # ADD a b reg
-    if instruction[0] != "OP": return CompileResult.UNRECOGNIZED_INSTRUCTION
+    if instruction[0] != "ANTE_NANPA": return CompileResult.UNRECOGNIZED_INSTRUCTION
     elif len(instruction) != 2: return CompileResult.COMPILE_ERROR
 
     register = instruction[1]
@@ -83,7 +83,7 @@ def labels(instruction: list[str]) -> CompileResult | str:
 def conditional_jump(instruction: list[str]) -> CompileResult | str:
     INSTRUCTION = "0b00000000000000000100000000000000".ljust(INSTRUCTION_LENGTH + 2, "0")
 
-    if instruction[0] != "JIF":
+    if instruction[0] != "TAWA_KEN":
         return CompileResult.UNRECOGNIZED_INSTRUCTION
 
     return INSTRUCTION
@@ -93,7 +93,7 @@ def conditional_jump(instruction: list[str]) -> CompileResult | str:
 def end(instruction: list[str]) -> CompileResult | str:
     INSTRUCTION = pad_instruction("0b00000000000000000000000001000000")
 
-    if instruction[0] != "END":
+    if instruction[0] != "PAKE":
         return CompileResult.UNRECOGNIZED_INSTRUCTION
 
     return INSTRUCTION
@@ -103,7 +103,7 @@ def end(instruction: list[str]) -> CompileResult | str:
 def jump(instruction: list[str]) -> CompileResult | str:
     INSTRUCTION = pad_instruction("0b00000000000000000000000010000000")
 
-    if instruction[0] != "JUMP":
+    if instruction[0] != "TAWA_ANTE":
         return CompileResult.UNRECOGNIZED_INSTRUCTION
 
     return INSTRUCTION
@@ -113,7 +113,7 @@ def jump(instruction: list[str]) -> CompileResult | str:
 def copy(instruction: list[str]) -> CompileResult | str:
     INSTRUCTION = "0b00000000000000000000100000"
 
-    if instruction[0] != "COPY":
+    if instruction[0] != "SAMA":
         return CompileResult.UNRECOGNIZED_INSTRUCTION
     if len(instruction) != 2:
         return CompileResult.COMPILE_ERROR
@@ -128,7 +128,7 @@ def copy(instruction: list[str]) -> CompileResult | str:
 def write(instruction: list[str]) -> CompileResult | str:
     INSTRUCTION = "0b00000000000000000000000100000000"
 
-    if instruction[0] != "WRITE":
+    if instruction[0] != "PALI_NIMI":
         return CompileResult.UNRECOGNIZED_INSTRUCTION
 
     return pad_instruction(INSTRUCTION)
@@ -138,7 +138,7 @@ def write(instruction: list[str]) -> CompileResult | str:
 def load(instruction: list[str]) -> CompileResult | str:
     INSTRUCTION = "0b00000000000000000000010000"
 
-    if instruction[0] != "LOAD":
+    if instruction[0] != "LANPAN":
         return CompileResult.UNRECOGNIZED_INSTRUCTION
     if len(instruction) != 2:
         return CompileResult.COMPILE_ERROR
@@ -153,7 +153,7 @@ def load(instruction: list[str]) -> CompileResult | str:
 def lshift(instruction: list[str]) -> CompileResult | str:
     INSTRUCTION = "0b00000000000000000010000000"
 
-    if instruction[0] != "LSHIFT":
+    if instruction[0] != "TAWA_SOTO":
         return CompileResult.UNRECOGNIZED_INSTRUCTION
     if len(instruction) != 2:
         return CompileResult.COMPILE_ERROR
@@ -168,7 +168,7 @@ def lshift(instruction: list[str]) -> CompileResult | str:
 def rshift(instruction: list[str]) -> CompileResult | str:
     INSTRUCTION = "0b00000000000000000011000000"
 
-    if instruction[0] != "RSHIFT":
+    if instruction[0] != "TAWA_TEJE":
         return CompileResult.UNRECOGNIZED_INSTRUCTION
     if len(instruction) != 2:
         return CompileResult.COMPILE_ERROR
@@ -214,7 +214,7 @@ def convert_label_references(instructions: list[str]) -> list[str]:
         if instruction.startswith("LABEL"):
             final_result.append("0x0")
             continue
-        elif not instruction.startswith("INSERT"):
+        elif not instruction.startswith("PANA"):
             final_result.append(instruction)
             continue
 
@@ -246,15 +246,15 @@ def registers(code: list[str]) -> list[str]:
 
 if __name__ == "__main__":
     example_instructions = [
-        "INSERT 0 r4",
-        "INSERT 1 r2",
-        "INSERT 4 r6",
+        "PANA 0 r4",
+        "PANA 1 r2",
+        "PANA 4 r6",
 
-        "loop:",
-        "   COPY r1",
-        "   OP r4",
-        "   INSERT loop r1",
-        "   JUMP"
+        "open:",
+        "    SAMA r1",
+        "    ANTE_NAMPA r4",
+        "    PANA open r1",
+        "    TAWA_ANTE"
     ]
     result = compiler.full_compile(example_instructions)
     print(result)

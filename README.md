@@ -23,15 +23,15 @@ if data is sent to the RDL, then that data will be written when a register is sp
 3. **Least significant bit** — The bit in a binary number with the least value. 
 
 ## Table
-| NAME   | DESCRIPTION                                                                               | FORMAT                 |
-|--------|-------------------------------------------------------------------------------------------|------------------------|
-| INSERT | Inserts a value into the specified register.                                              | INSERT \[value] \[rx¹] |
-| COPY   | Copies a value from the register specified in r6 to the register data lane.               | COPY \[rx¹]            |
-| JUMP   | Unconditionally jumps to the instruction address specified via r1                         | JUMP                   |
-| JIF    | Conditionally jumps to the instruction address in r1 if the LSB³ of r2 is 1.              | JIF                    |
-| END    | Unconditionally jumps to the top of the instruction stack.                                | END                    |
-| WRITE  | Writes r1 to r2 address in the RAM.                                                       | WRITE                  |
-| LOAD   | Loads value at r2 address to the RDL².                                                    | LOAD \[rx¹]            |
-| LSHIFT | Shifts r1 left and writes the result to the RDL².                                         | LSHIFT                 |
-| RSHIFT | Shifts r1 right and writes the result to the RDL².                                        | RSHIFT                 |
-| OP     | Adds r1 to r2. If the LSB³ of r3 is 1, then subtract instead. Result is sent to the RDL². | OP                     |
+| NAME       | DESCRIPTION                                                                               | FORMAT               |
+|------------|-------------------------------------------------------------------------------------------|----------------------|
+| PANA       | Inserts a value into the specified register.                                              | PANA \[nanpa] \[rx¹] |
+| SAMA       | Copies a value from the register specified in r6 to the register data lane.               | SAMA \[rx¹]          |
+| TAWA_ANTE  | Unconditionally jumps to the instruction address specified via r1                         | TAWA_ANTE            |
+| TAWA_KEN   | Conditionally jumps to the instruction address in r1 if the LSB³ of r2 is 1.              | TAWA_KEN             |
+| PAKE       | Unconditionally jumps to the top of the instruction stack.                                | PAKE                 |
+| PALI_NIMI  | Writes r1 to r2 address in the RAM.                                                       | PALI_NIMI            |
+| LANPAN     | Loads value at r2 address to the RDL².                                                    | LANPAN \[rx¹]        |
+| TAWA_SOTO  | Shifts r1 left and writes the result to the RDL².                                         | TAWA_SOTO            |
+| TAWA_TEJE  | Shifts r1 right and writes the result to the RDL².                                        | TAWA_TEJE            |
+| ANTE_NANPA | Adds r1 to r2. If the LSB³ of r3 is 1, then subtract instead. Result is sent to the RDL². | ANTE_NANPA           |
