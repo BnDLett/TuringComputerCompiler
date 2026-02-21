@@ -179,6 +179,31 @@ def rshift(instruction: list[str]) -> CompileResult | str:
     return pad_instruction(f"{INSTRUCTION}{register_flag}")
 
 
+@compiler.rule
+def periread(instruction: list[str]) -> CompileResult | str:
+    INSTRUCTION = "0b00000000000000010000000000"
+
+    if instruction[0] != "PERIREAD":
+        return CompileResult.UNRECOGNIZED_INSTRUCTION
+    if len(instruction) != 2:
+        return CompileResult.COMPILE_ERROR
+
+    register = instruction[1]
+    register_flag = register_to_flag(int(register), "000000")
+
+    return pad_instruction(f"{INSTRUCTION}{register_flag}")
+
+
+@compiler.rule
+def periwrite(instruction: list[str]) -> CompileResult | str:
+    INSTRUCTION = pad_instruction("0b00000000000000100000000000")
+
+    if instruction[0] != "PERIWRITE":
+        return CompileResult.UNRECOGNIZED_INSTRUCTION
+
+    return INSTRUCTION
+
+
 def get_label_positions(instructions: list[str]) -> dict[str, int]:
     label_positions: dict[str, int] = {}
 
