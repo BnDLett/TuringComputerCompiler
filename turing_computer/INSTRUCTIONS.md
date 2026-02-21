@@ -67,6 +67,16 @@ All addresses are zero-index based, excluding flags.
     register 2. The result of the operation is sent to the register data lane.
 ```
 
+# Peripherals 
+```
+0b00000000000000010000000000*****
+    Reads from the peripheral specified in r6, and sends the data to the register data lane. Number of available
+    peripherals depends on limitations of the given CPU.
+
+0b0000000000000010000000000000000
+    Triggers a peripheral to write. The peripheral's address is specified in r6. 
+```
+
 ## Unused Instructions
 ```
 - 0b00000000000000000000001000000000

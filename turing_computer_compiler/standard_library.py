@@ -300,7 +300,7 @@ if __name__ == "__main__":
     loop:
         PERIREAD r1
         OP r1
-        PERIWRITE 0
+        PERIWRITE
         INSERT loop r1
         JUMP
     """
