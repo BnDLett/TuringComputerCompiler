@@ -269,6 +269,19 @@ def registers(code: list[str]) -> list[str]:
     return final_result
 
 
+@compiler.pre_compile_rule
+def clean_blanks(code: list[str]) -> list[str]:
+    final_result: list[str] = []
+
+    for line in code:
+        if line.strip() == "":
+            continue
+
+        final_result.append(line)
+
+    return final_result
+
+
 if __name__ == "__main__":
     example_instructions = [
         "INSERT 0 r4",
