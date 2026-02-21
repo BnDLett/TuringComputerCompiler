@@ -283,17 +283,29 @@ def clean_blanks(code: list[str]) -> list[str]:
 
 
 if __name__ == "__main__":
-    example_instructions = [
-        "INSERT 0 r4",
-        "INSERT 1 r2",
-        "INSERT 4 r6",
-
-        "loop:",
-        "   COPY r1",
-        "   OP r4",
-        "   INSERT loop r1",
-        "   JUMP"
-    ]
+    # example_instructions = [
+    #     "INSERT 0 r4",
+    #     "INSERT 1 r2",
+    #     "INSERT 4 r6",
+    #
+    #     "loop:",
+    #     "   COPY r1",
+    #     "   OP r4",
+    #     "   INSERT loop r1",
+    #     "   JUMP"
+    # ]
+    instructions = """
+    INSERT 0 r6
+    INSERT 1 r2
+    loop:
+        PERIREAD r1
+        OP r1
+        PERIWRITE 0
+        INSERT loop r1
+        JUMP
+    """
+    example_instructions = instructions.split("\n")
+    print(example_instructions)
     result = compiler.full_compile(example_instructions)
     print(result)
     print()
