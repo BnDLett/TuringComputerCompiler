@@ -51,8 +51,8 @@ def insert(instruction: list[str], label_position: int | None = None) -> Compile
     value_binary = bin(int(value)).removeprefix("0b").rjust(INSTRUCTION_LENGTH, "0")
 
     # Register is not a general-purpose register. It is intended for register flags.
-    if register == "6":
-        value_binary = register_to_flag(int(value), "000000").rjust(INSTRUCTION_LENGTH, "0")
+    # if register == "6":
+    #     value_binary = register_to_flag(int(value), "000000").rjust(INSTRUCTION_LENGTH, "0")
 
     return register_flag + value_binary
 
