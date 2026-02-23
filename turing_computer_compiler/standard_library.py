@@ -72,6 +72,20 @@ def arithmetic(instruction: list[str]) -> CompileResult | str:
 
 
 @compiler.rule
+def arithmetic(instruction: list[str]) -> CompileResult | str:
+    INSTRUCTION = "0b00000000000000001000000000"
+
+    # ADD a b reg
+    if instruction[0] != "BITWISE": return CompileResult.UNRECOGNIZED_INSTRUCTION
+    elif len(instruction) != 2: return CompileResult.COMPILE_ERROR
+
+    register = instruction[1]
+    final_instruction = pad_instruction(INSTRUCTION + register_to_flag(int(register), "000000"))
+
+    return final_instruction
+
+
+@compiler.rule
 def labels(instruction: list[str]) -> CompileResult | str:
     if instruction[0][-1] != SpecialCharacters.COLON.value:
         return CompileResult.UNRECOGNIZED_INSTRUCTION
@@ -294,16 +308,25 @@ if __name__ == "__main__":
     #     "   INSERT loop r1",
     #     "   JUMP"
     # ]
+
+    # instructions = """
+    # INSERT 0 r6
+    # INSERT 1 r2
+    # loop:
+    #     PERIREAD r1
+    #     OP r1
+    #     PERIWRITE
+    #     INSERT loop r1
+    #     JUMP
+    # """
+
     instructions = """
-    INSERT 0 r6
+    INSERT 1 r1
     INSERT 1 r2
-    loop:
-        PERIREAD r1
-        OP r1
-        PERIWRITE
-        INSERT loop r1
-        JUMP
+    
+    BITWISE r4
     """
+
     example_instructions = instructions.split("\n")
     print(example_instructions)
     result = compiler.full_compile(example_instructions)
