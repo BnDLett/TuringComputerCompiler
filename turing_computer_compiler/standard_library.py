@@ -72,8 +72,8 @@ def arithmetic(instruction: list[str]) -> CompileResult | str:
 
 
 @compiler.rule
-def arithmetic(instruction: list[str]) -> CompileResult | str:
-    INSTRUCTION = "0b00000000000000001000000000"
+def bitwise(instruction: list[str]) -> CompileResult | str:
+    INSTRUCTION = "0b00000000000000000000001000"
 
     # ADD a b reg
     if instruction[0] != "BITWISE": return CompileResult.UNRECOGNIZED_INSTRUCTION
@@ -321,8 +321,9 @@ if __name__ == "__main__":
     # """
 
     instructions = """
-    INSERT 1 r1
+    INSERT 0 r1
     INSERT 1 r2
+    INSERT 1 r3
     
     BITWISE r4
     """

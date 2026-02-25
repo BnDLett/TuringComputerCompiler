@@ -66,7 +66,7 @@ All addresses are zero-index based, excluding flags.
     Adds register 2 to register 1. If the least significant bit of register 3 is 1, then it'll subtract register 1 from 
     register 2. The result of the operation is sent to the register data lane.
 
-0b00000000000000001000000000*****
+0b00000000000000000000001000*****
     Does a bitwise logic operation specified via register 3 between register 2 and register 1. The following modes are
     available: 0 for XOR, 1 for AND, 2 for OR, and 3 for NOT. NOT will only use register 1 for the value. The final
     result of the operation is sent to the register data lane. 
