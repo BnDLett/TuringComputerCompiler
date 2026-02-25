@@ -60,7 +60,7 @@ All addresses are zero-index based, excluding flags.
 ```
 
 
-# Arithmetic
+## Arithmetic
 ```
 0b00000000000000000100000000******
     Adds register 2 to register 1. If the least significant bit of register 3 is 1, then it'll subtract register 1 from 
@@ -72,7 +72,7 @@ All addresses are zero-index based, excluding flags.
     result of the operation is sent to the register data lane. 
 ```
 
-# Peripherals 
+## Peripherals 
 ```
 0b00000000000000010000000000*****
     Reads from the peripheral specified in r6, and sends the data to the register data lane. Number of available
