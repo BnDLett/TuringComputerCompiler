@@ -39,4 +39,5 @@ if data is sent to the RDL, then that data will be written when a register is sp
 | PERIREAD  | Reads from a peripheral specified in r6 and writes it to the RDL².                        | PERIREAD \[rx¹]        |
 | PERIWRITE | Triggers a signal to peripheral r6 that data in r1 should be written.                     | PERIWRITE              |
 | BITWISE   | Does a BITWISE operation (specified via r3*) between r1 and r2 and sends it to the RDL².  | BITWISE \[rx¹]         |
+
 \*available modes are specified via r3. 0 for XOR, 1 for AND, 2 for OR, and 3 for NOT. Note that NOT only uses r1.
